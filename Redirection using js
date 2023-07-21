@@ -1,0 +1,32 @@
+//add code in function.php
+
+function geoip_redirection() {
+    // Check if the 'geoip-country-PK' class is added to the body.
+    if (in_array('geoip-country-PK', get_body_class())) {
+        // Redirect visitors from Pakistan to the desired URL.
+        wp_redirect('https://yourwebsite.com/pakistan/');
+        exit;
+    }
+}
+add_action('template_redirect', 'geoip_redirection');
+
+
+function enqueue_custom_script() {
+    wp_enqueue_script('custom-redirect-script', get_stylesheet_directory_uri() . '/redirect.js', array(), '1.0', true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_script');
+
+
+//create redirect.js fiel and add folowwing code 
+
+document.addEventListener("DOMContentLoaded", function () {
+
+		var body = document.querySelector("body");
+		// Check if the body has the 'geoip-country-PK' class.
+		if (body.classList.contains("geoip-country-PK")) {
+		// Redirect visitors from Pakistan to the desired URL.
+		window.location.href = "https://yourwebsite/pakistan";
+        
+	}
+
+});
