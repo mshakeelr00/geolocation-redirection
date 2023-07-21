@@ -16,7 +16,7 @@ function country_based_redirection() {
             $country_code = $data['countryCode'];
             // Redirect based on the country and URL
             
-            if($ip == '71.234.152.17')
+            if($ip == 'xx.xxx.xxx.xx')
             {
                 
             }
@@ -24,7 +24,7 @@ function country_based_redirection() {
             {
 
                 if ($country_code != 'HT' && strpos($_SERVER['REQUEST_URI'], '/haiti/') !== false) {
-    				echo "<script>window.location.href='https://gerbyclick.com/'</script>";
+    				echo "<script>window.location.href='https://website.com/'</script>";
                     exit;
                 }
 
